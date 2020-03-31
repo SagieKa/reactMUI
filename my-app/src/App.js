@@ -7,9 +7,11 @@ import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Header from './Components/Header';
-import { Button, Box } from '@material-ui/core';
+import { Button, Box, Hidden } from '@material-ui/core';
 import Functions from './Components/Functions';
 import Body from './Components/Body';
+import Form from './Components/Form';
+
 // background-color: #63d471;
 // background-image: linear-gradient(315deg, #63d471 0%, #233329 74%);
 // background-color: #0cbaba;
@@ -43,18 +45,18 @@ function App() {
   return (
     <div>
       <Box height='100%' className={classes.try}>
-        <Grid container>
-          <Header />
-        </Grid>
-
-        <Functions />
-
-        <Grid container>
-          <Typography variant='subtitle1'>Material-UI Grid:</Typography>
-        </Grid>
+        <Header />
 
         <Body />
       </Box>
+      {/* <Grid container>
+          <Grid item xs={12}> */}
+
+      {/* </Grid>
+        </Grid> */}
+      {/* <Grid container>
+          <Typography variant='subtitle1'>Material-UI Grid:</Typography>
+        </Grid> */}
     </div>
   );
 }

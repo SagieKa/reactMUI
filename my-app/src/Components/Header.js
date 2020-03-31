@@ -8,6 +8,8 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import { red } from '@material-ui/core/colors';
+import Grid from '@material-ui/core/Grid';
+import { fromUnixTime } from 'date-fns';
 // background-color #7cffcb;
 // background-image linear-gradient(315deg, #7cffcb 0%, #74f2ce 74%);
 
@@ -74,35 +76,37 @@ export default function Header() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position='static' className={classes.try}>
-        <Toolbar>
-          <IconButton
-            edge='start'
-            className={classes.menuButton}
-            color='inherit'
-            aria-label='open drawer'
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant='h6' noWrap>
-            Family-Plan
-          </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+    <Grid container>
+      <div className={classes.root}>
+        <AppBar position='static' className={classes.try}>
+          <Toolbar>
+            <IconButton
+              edge='start'
+              className={classes.menuButton}
+              color='inherit'
+              aria-label='open drawer'
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography className={classes.title} variant='h6' noWrap>
+              Family-Plan
+            </Typography>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder='Search…'
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
             </div>
-            <InputBase
-              placeholder='Search…'
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
-        </Toolbar>
-      </AppBar>
-    </div>
+          </Toolbar>
+        </AppBar>
+      </div>
+    </Grid>
   );
 }

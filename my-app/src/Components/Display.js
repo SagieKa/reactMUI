@@ -7,7 +7,6 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Form from './Form';
 import Functions from './Functions';
-import Display from './Display';
 import { Button, Box } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -35,15 +34,21 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Body() {
+function Display() {
   const classes = useStyles();
   return (
-    <Grid>
-      <Functions />
-
-      <Display />
+    <Grid container>
+      <Grid item xs={1}>
+        <Paper className={classes.paper}>updates</Paper>
+      </Grid>
+      <Grid item xs={10}>
+        <Paper className={classes.paper}>what you add is here</Paper>
+      </Grid>
+      <Grid item xs={1}>
+        <Paper className={classes.paper}>updates</Paper>
+      </Grid>
     </Grid>
   );
 }
 
-export default Body;
+export default Display;
