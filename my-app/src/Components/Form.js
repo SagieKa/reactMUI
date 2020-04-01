@@ -2,9 +2,10 @@ import React from 'react';
 
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { Grid } from '@material-ui/core';
+import { Grid, Input } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Icon from '@material-ui/core/Icon';
+import axios from 'axios';
 
 import Button from '@material-ui/core/Button';
 import BasicDatePicker from './FormDate';
@@ -57,28 +58,74 @@ const currencies = [
   }
 ];
 
-export default function Form() {
+export default function Form(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState('3900');
   const [bank, setBank] = React.useState('OsharHyal');
-
   const [currency, setCurrency] = React.useState('ILS');
+  const [subject, setSubject] = React.useState('House');
+  const [type, setType] = React.useState('Add');
+  const [file, setFile] = React.useState('null');
+  const [timeHour, setTimeHour] = React.useState(new Date());
+  const [timeDate, setDate] = React.useState(new Date());
+  const [timeDateNow, setTimeDateNow] = React.useState(new Date());
 
-  const handleChange2 = event => {
-    setCurrency(event.target.value);
+  const updateFile = file => {
+    setFile(file);
+    return false;
+  };
+  const updateHour = hour => {
+    setTimeHour(hour.getHours());
+  };
+  const updateDate = item => {
+    setDate(item);
+  };
+  const updateDateNow = date => {
+    setTimeDateNow(date);
   };
 
+  const handleCurrency = event => {
+    setCurrency(event.target.value);
+  };
   const handleBank = event => {
     setBank(event.target.value);
   };
-  const handleChange = event => {
+  const handleAmount = event => {
     setValue(event.target.value);
+  };
+  const handleSubject = event => {
+    setSubject(event.target.value);
+  };
+  const handleType = event => {
+    setType(event.target.value);
+  };
+
+  const send = event => {
+    const transaction = {
+      amount: value,
+      currency: currency,
+      bank: bank,
+      subject: subject,
+      type: type,
+      timeDate: timeDate,
+      timeHour: timeHour,
+      timeDateNow: timeDateNow,
+      file: file
+    };
+    console.log('this is the event:');
+    console.log(transaction);
+    console.log('end event');
   };
 
   return (
     <Grid container className={classes.grid}>
       <Grid item xs={12}>
-        <form className={classes.root} noValidate autoComplete='off'>
+        <form
+          className={classes.root}
+          noValidate
+          onSubmit={send}
+          autoComplete='off'
+        >
           <Grid item xs={12}>
             <div>
               <TextField
@@ -87,14 +134,14 @@ export default function Form() {
                 multiline
                 rowsMax='4'
                 value={value}
-                onChange={handleChange}
+                onChange={handleAmount}
               />
               <TextField
                 id='standard-select-currency'
                 select
                 label='Select'
                 value={currency}
-                onChange={handleChange2}
+                onChange={handleCurrency}
                 helperText='Please select your currency'
               >
                 {currencies.map(option => (
@@ -122,6 +169,7 @@ export default function Form() {
                 label='Subject of Amount'
                 placeholder='Placeholder'
                 multiline
+                onChange={handleSubject}
               />
             </div>
           </Grid>
@@ -134,22 +182,31 @@ export default function Form() {
                 multiline
                 rowsMax='4'
                 value={'Add'}
-                onChange={handleChange}
+                onChange={handleType}
               />
-              <BasicDatePicker />
+              {/* <BasicDatePicker /> */}
+              <BasicDatePicker
+                updateHour={updateHour}
+                updateDate={updateDate}
+                updateDateNow={updateDateNow}
+              />
             </div>
           </Grid>
           <Grid container className={classes.end}>
             <Grid xs={4}></Grid>
-            <UploadButtons />
+            <UploadButtons updateFile={updateFile} />
             <Grid item xs={4}>
               <Button
                 variant='contained'
                 color='secondary'
+                onClick={send}
+
                 // className={classes.button}
                 // endIcon={<Icon>send</Icon>}
               >
-                Send
+                {' '}
+                Save
+                {/* <Input type='submit'>Save</Input> */}
               </Button>
             </Grid>
           </Grid>

@@ -8,12 +8,23 @@ import {
   KeyboardDatePicker
 } from '@material-ui/pickers';
 
-export default function MaterialUIPickers() {
+export default function MaterialUIPickers(props) {
   // The first commit of Material-UI
   const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [selectedHour, setSelectedHour] = React.useState(new Date());
+  const [selectedDateChose, setSelectedDateChose] = React.useState(new Date());
 
   const handleDateChange = date => {
     setSelectedDate(date);
+    props.updateDateNow(selectedDate);
+  };
+  const handleHourChange = date => {
+    setSelectedHour(date);
+    props.updateHour(selectedHour);
+  };
+  const handleDateChangeChose = date => {
+    setSelectedDateChose(date);
+    props.updateDate(date);
   };
 
   return (
@@ -37,8 +48,8 @@ export default function MaterialUIPickers() {
         id='date-picker-dialog'
         label='Date Of Function'
         format='MM/dd/yyyy'
-        value={selectedDate}
-        onChange={handleDateChange}
+        value={selectedDateChose}
+        onChange={handleDateChangeChose}
         KeyboardButtonProps={{
           'aria-label': 'change date'
         }}
@@ -47,8 +58,8 @@ export default function MaterialUIPickers() {
         margin='normal'
         id='time-picker'
         label='Time Of Function'
-        value={selectedDate}
-        onChange={handleDateChange}
+        value={selectedHour}
+        onChange={handleHourChange}
         KeyboardButtonProps={{
           'aria-label': 'change time'
         }}
