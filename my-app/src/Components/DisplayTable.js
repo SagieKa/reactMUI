@@ -53,10 +53,17 @@ export default function MaterialTableDemo(props) {
       options={{
         rowStyle: (rowData) => {
           if (rowData.type === 'Add') {
-            return { backgroundColor: 'green' };
+            return {
+              // background: 'linear-gradient(315deg, #ddffef 0%, #7bed9f 74%)',
+              background:
+                ' linear-gradient(90deg, rgba(190,255,224,1) 31%, rgba(250,255,253,0.7987570028011204) 100%)',
+            };
           }
           if (rowData.type === 'Minus') {
-            return { backgroundColor: 'red' };
+            return {
+              background:
+                'linear-gradient( 89.5deg,  rgba(246,114,128,1) 0.2%, rgba(248,177,149,1) 90.6% )',
+            };
           }
 
           return {};
