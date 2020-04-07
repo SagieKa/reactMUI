@@ -7,15 +7,15 @@ import AttachFile from '@material-ui/icons/AttachFile';
 import Description from '@material-ui/icons/Description';
 import axios from 'axios';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
-      margin: theme.spacing(0)
-    }
+      margin: theme.spacing(0),
+    },
   },
   input: {
-    display: 'none'
-  }
+    display: 'none',
+  },
 }));
 
 export default function UploadButtons(props) {
@@ -23,13 +23,14 @@ export default function UploadButtons(props) {
   const [file, setFile] = React.useState(null);
   const [upload, setUpload] = React.useState(null);
   const [loaded, setloaded] = React.useState(0);
-  const nim = e => {
-    console.warn(e.target.files);
+  const chooseFile = (e) => {
+    // console.warn(e.target.files);
     let file = e.target.files;
     setUpload(file[0]);
     // click();
   };
-  const click = () => {
+  const click = (e) => {
+    e.preventDefault();
     const data = new FormData();
     data.append('file', upload);
     console.log(data);
@@ -37,21 +38,34 @@ export default function UploadButtons(props) {
       .post('http://localhost:8000/upload', data, {
         // receive two    parameter endpoint url ,form data
       })
-      .then(res => {
+      .then((res) => {
         // then print response status
 
-        console.log(res.data.filename);
-        console.log(res.data.filename);
-        console.log(res.data.filename);
-        console.log(res.data.filename);
-        console.log(res.data.filename);
-        console.log(res.data.filename);
-        console.log(res.data.filename);
         setFile(res.data.filename);
         console.log(res.data.filename);
         props.updateFile(res.data.filename);
       });
     return false;
+  };
+
+  const click2 = () => {
+    const data = new FormData();
+    data.append('file', upload);
+    // console.log(data);
+    setFile('dhdjdjh');
+
+    axios
+      .post('http://localhost:8000/upload', data, {
+        // receive two    parameter endpoint url ,form data
+      })
+      .then((res) => {
+        // then print response status
+
+        setFile(res.data.filename);
+        console.log(res.data.filename);
+        props.updateFile(res.data.filename);
+        // res.send({ result: true });
+      });
   };
   return (
     <Grid item xs={4}>
@@ -67,18 +81,29 @@ export default function UploadButtons(props) {
           variant='contained'
           color='primary'
           component='span'
-          onClick={click}
+          onClick={click2}
         >
           Upload
         </Button>
+        {/* <button
+          type='button'
+          // onClick={e => {
+          //   click(e);
+          //   return false;
+          // }}
+          onClick={click2}
+        >
+          Upload
+        </button>
+        <input type='button' onClick={click2} value='Click Me'></input> */}
       </label>
       <input
         // accept='*.pdf'
         className={classes.input}
         id='icon-button-file'
         type='file'
-        onChange={e => {
-          nim(e);
+        onChange={(e) => {
+          chooseFile(e);
         }}
         // accept='image/*'
 

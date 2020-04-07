@@ -45,21 +45,37 @@ import { makeMaskFromFormat } from '@material-ui/pickers/_helpers/text-field-hel
 //   }
 // }));
 const useStyles = makeStyles({
-  root: { padding: 10, marginBottom: 10, marginTop: 20 }
+  root: { padding: 10, marginBottom: 10, marginTop: 20 },
 });
 
-function Functions() {
+function Functions(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const [showME, setshowME] = React.useState(true);
+  const [showMEPlus, setshowMEPlus] = React.useState(false);
+  const [showMEMinus, setshowMEMinus] = React.useState(false);
+  const [transaction, setTransaction] = React.useState('');
 
-  function tryprint(e) {
-    if (!showME) {
-      setshowME(true);
+  function handelPlus(e) {
+    if (!showMEPlus) {
+      setshowMEMinus(false);
+      setshowMEPlus(true);
     } else {
-      setshowME(false);
+      setshowMEPlus(false);
     }
   }
+  function handelMinus(e) {
+    if (!showMEMinus) {
+      setshowMEPlus(false);
+      setshowMEMinus(true);
+    } else {
+      setshowMEMinus(false);
+    }
+  }
+  const getTrans = (trans) => {
+    setTransaction(trans);
+    props.getTransBody(trans);
+  };
+
   return (
     <Grid container>
       <Grid item xs={12}>
@@ -74,27 +90,34 @@ function Functions() {
         >
           <BottomNavigationAction
             on
-            onClick={tryprint}
+            onClick={handelPlus}
             label='Add'
             icon={<TrendingUp />}
           />
 
           <BottomNavigationAction
             label='Minus'
-            onClick={tryprint}
+            onClick={handelMinus}
             icon={<TrendingDown />}
           />
 
           <BottomNavigationAction
             label='Another'
-            onClick={tryprint}
+            onClick={handelPlus}
             icon={<BuildIcon />}
           />
         </BottomNavigation>
       </Grid>
-      {showME ? (
+      {showMEPlus ? (
         <Grid item xs={12}>
-          <Form />
+          <Form getTrans={getTrans} type={'Add'} />
+        </Grid>
+      ) : (
+        ''
+      )}
+      {showMEMinus ? (
+        <Grid item xs={12}>
+          <Form getTrans={getTrans} type={'Minus'} />
         </Grid>
       ) : (
         ''

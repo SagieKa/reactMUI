@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import BasicDatePicker from './FormDate';
 import UploadButtons from './FormUpload';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: 'white',
     marginTop: 20,
@@ -19,43 +19,43 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 20,
     '& .MuiTextField-root': {
       margin: theme.spacing(2),
-      width: '20ch'
-    }
+      width: '20ch',
+    },
   },
   grid: {
-    marginBottom: 8
+    marginBottom: 8,
   },
-  end: { margin: 5 }
+  end: { margin: 5 },
 }));
 
 const banks = [
   {
-    name: 'OsharHyal'
+    name: 'OsharHyal',
   },
   { name: 'Leomi' },
-  { name: 'Hapoalim' }
+  { name: 'Hapoalim' },
 ];
 const currencies = [
   {
     value: 'ILS',
-    label: '₪'
+    label: '₪',
   },
   {
     value: 'USD',
-    label: '$'
+    label: '$',
   },
   {
     value: 'EUR',
-    label: '€'
+    label: '€',
   },
   {
     value: 'BTC',
-    label: '฿'
+    label: '฿',
   },
   {
     value: 'JPY',
-    label: '¥'
-  }
+    label: '¥',
+  },
 ];
 
 export default function Form(props) {
@@ -64,43 +64,43 @@ export default function Form(props) {
   const [bank, setBank] = React.useState('OsharHyal');
   const [currency, setCurrency] = React.useState('ILS');
   const [subject, setSubject] = React.useState('House');
-  const [type, setType] = React.useState('Add');
+  const [type, setType] = React.useState(props.type);
   const [file, setFile] = React.useState('null');
   const [timeHour, setTimeHour] = React.useState(new Date());
   const [timeDate, setDate] = React.useState(new Date());
   const [timeDateNow, setTimeDateNow] = React.useState(new Date());
 
-  const updateFile = file => {
+  const updateFile = (file) => {
     setFile(file);
     return false;
   };
-  const updateHour = hour => {
+  const updateHour = (hour) => {
     setTimeHour(hour.getHours());
   };
-  const updateDate = item => {
+  const updateDate = (item) => {
     setDate(item);
   };
-  const updateDateNow = date => {
+  const updateDateNow = (date) => {
     setTimeDateNow(date);
   };
 
-  const handleCurrency = event => {
+  const handleCurrency = (event) => {
     setCurrency(event.target.value);
   };
-  const handleBank = event => {
+  const handleBank = (event) => {
     setBank(event.target.value);
   };
-  const handleAmount = event => {
+  const handleAmount = (event) => {
     setValue(event.target.value);
   };
-  const handleSubject = event => {
+  const handleSubject = (event) => {
     setSubject(event.target.value);
   };
-  const handleType = event => {
+  const handleType = (event) => {
     setType(event.target.value);
   };
 
-  const send = event => {
+  const send = (event) => {
     const transaction = {
       amount: value,
       currency: currency,
@@ -110,11 +110,18 @@ export default function Form(props) {
       timeDate: timeDate,
       timeHour: timeHour,
       timeDateNow: timeDateNow,
-      file: file
+      file: file,
     };
-    console.log('this is the event:');
-    console.log(transaction);
-    console.log('end event');
+    let requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(transaction),
+    };
+    fetch('http://localhost:8000/saveData', requestOptions).then((res) => {
+      // then print response status
+      console.log('sucsess');
+    });
+    props.getTrans(transaction);
   };
 
   return (
@@ -144,7 +151,7 @@ export default function Form(props) {
                 onChange={handleCurrency}
                 helperText='Please select your currency'
               >
-                {currencies.map(option => (
+                {currencies.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
                     {option.label}
                   </MenuItem>
@@ -158,7 +165,7 @@ export default function Form(props) {
                 onChange={handleBank}
                 helperText='Please select your Bank'
               >
-                {banks.map(bank => (
+                {banks.map((bank) => (
                   <MenuItem key={bank.name} value={bank.name}>
                     {bank.name}
                   </MenuItem>
@@ -181,7 +188,7 @@ export default function Form(props) {
                 label='Type'
                 multiline
                 rowsMax='4'
-                value={'Add'}
+                value={props.type}
                 onChange={handleType}
               />
               {/* <BasicDatePicker /> */}
@@ -193,20 +200,18 @@ export default function Form(props) {
             </div>
           </Grid>
           <Grid container className={classes.end}>
-            <Grid xs={4}></Grid>
+            <Grid item xs={4}></Grid>
             <UploadButtons updateFile={updateFile} />
             <Grid item xs={4}>
               <Button
                 variant='contained'
                 color='secondary'
-                onClick={send}
-
-                // className={classes.button}
-                // endIcon={<Icon>send</Icon>}
+                onClick={() => {
+                  send();
+                  return false;
+                }}
               >
-                {' '}
                 Save
-                {/* <Input type='submit'>Save</Input> */}
               </Button>
             </Grid>
           </Grid>
