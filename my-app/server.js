@@ -3,6 +3,8 @@ var app = express();
 var http = require('http').Server(app);
 const fs = require('fs');
 const download = require('download');
+var xml2js = require('xml2js');
+var parser = new xml2js.Parser();
 const path = require('path');
 const axios = require('axios');
 var multer = require('multer');
@@ -65,17 +67,25 @@ app.post('/saveData', async function (req, res, next) {
   await trans.save();
   console.log('this is schema:');
   // let rek = await transSchema.find({});
-  // console.log(rek);
+  console.log(rek);
   console.log('this is schema:');
   console.log(trans);
 
   db_json.data.push(req.body);
-  // console.log(db.data);
+  console.log(db.data);
 });
 app.get('/getData', async function (req, res, next) {
   let trans = await transSchema.find({});
   res.send({ result: trans });
 });
+app.get('/getCurrency', async function (req, res, next) {
+  axios.get('https://www.boi.org.il/currency.xml').then(function (response) {
+    parser.parseString(response.data, function (err, result) {
+      res.send({ result: result.CURRENCIES.CURRENCY });
+    });
+  });
+});
+
 app.post('/updateData', async function (req, res, next) {
   await transSchema.findOneAndUpdate(
     { _id: req.body._id },
@@ -91,6 +101,7 @@ app.post('/updateData', async function (req, res, next) {
 
 app.delete('/deleteData/:id', async function (req, res, next) {
   console.log(req.params.id);
+
   await transSchema.deleteOne({ _id: req.params.id }, function (err) {
     if (err) {
       console.log(err);

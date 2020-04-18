@@ -16,7 +16,7 @@ const data = [
     amount: 5555,
     currency: 'ILS',
     bank: 'Leomi',
-    subject: 'MOTEK',
+    subject: 'MOddddEK',
     type: 'Add',
     timeDate: new Date('Sat Apr 04 2020 15:49:32 GMT+0300 (שעון ישראל (קיץ))'),
     timeHour: new Date('Sat Apr 04 2020 15:49:32 GMT+0300 (שעון ישראל (קיץ))'),
@@ -30,7 +30,7 @@ const data = [
 const columns = [
   { title: 'Type', field: 'type' },
   { title: 'Subject', field: 'subject' },
-  { title: 'Amount', field: 'amount' },
+  { title: 'Amount', field: 'amount', type: 'number' },
   { title: 'Currency', field: 'currency' },
   { title: 'Time of Transaction', field: 'timeDate', type: 'date' },
   { title: 'Time of Hour Transaction', field: 'timeHour', type: 'date' },

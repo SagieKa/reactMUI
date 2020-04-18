@@ -14,6 +14,8 @@ import UploadButtons from './FormUpload';
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: 'white',
+    boxShadow: ' 0 4px 90px 0 rgba(0, 0, 0, 0.2)',
+    borderRadius: '60px',
     marginTop: 20,
     textAlign: 'center',
     marginBottom: 20,
@@ -102,7 +104,7 @@ export default function Form(props) {
 
   const send = (event) => {
     const transaction = {
-      amount: value,
+      amount: Number(value),
       currency: currency,
       bank: bank,
       subject: subject,
@@ -126,7 +128,8 @@ export default function Form(props) {
 
   return (
     <Grid container className={classes.grid}>
-      <Grid item xs={12}>
+      <Grid item xs={1} />
+      <Grid item xs={10}>
         <form
           className={classes.root}
           noValidate

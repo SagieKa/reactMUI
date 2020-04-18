@@ -61,7 +61,7 @@ export default function UploadButtons(props) {
     return false;
   };
 
-  const click2 = () => {
+  const click2 = (e) => {
     const data = new FormData();
     data.append('file', upload);
     // console.log(data);
@@ -80,6 +80,7 @@ export default function UploadButtons(props) {
         setShowDone(true);
         // res.send({ result: true });
       });
+    e.preventDefault();
   };
   return (
     // <Grid item xs={1}>

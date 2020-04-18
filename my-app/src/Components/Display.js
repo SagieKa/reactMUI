@@ -6,6 +6,7 @@ import {
   useImperativeHandle,
   forwardRef,
 } from 'react';
+import DisplayStatus from './DisplayStatus';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Alert, AlertTitle } from '@material-ui/lab';
@@ -13,6 +14,7 @@ import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import DisplayTable from './DisplayTable';
+import DisplayCurrency from './DisplayCurrency';
 import Form from './Form';
 import Functions from './Functions';
 import { Button, Box } from '@material-ui/core';
@@ -32,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     width: '400',
-    height: '250px',
+    minHeight: '500px',
     padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
@@ -55,7 +57,18 @@ const useStyles = makeStyles((theme) => ({
 
 const Display = forwardRef((props, ref) => {
   const classes = useStyles();
-  const [updateArr, setUpdateArr] = useState([]);
+  const [updateArr, setUpdateArr] = React.useState([]);
+  const [sum, setSum] = React.useState({
+    Add: 0,
+    Minus: 0,
+    Total: 0,
+  });
+
+  const updateSum = async (sum) => {
+    console.log('hi you are in update sum');
+    await setSum({ Add: sum.Add, Minus: sum.Minus, Total: sum.Total });
+    console.log(sum);
+  };
 
   useImperativeHandle(ref, () => ({
     setDisplay(trans) {
@@ -69,25 +82,17 @@ const Display = forwardRef((props, ref) => {
 
   return (
     <Grid container>
-      <Grid item xs={2}>
-        <Alert severity='info' className={classes.alerts}>
-          <AlertTitle>Your acoount</AlertTitle>
-          <strong>1000$</strong>
-        </Alert>
-        <Alert severity='error' className={classes.alerts}>
-          <AlertTitle>All Minus</AlertTitle>
-          <strong>5000$</strong>
-        </Alert>
-        <Alert severity='success' className={classes.alerts}>
-          <AlertTitle>All Plus</AlertTitle>
-          <strong>6000$</strong>
-          <strong>{updateArr.map((x) => x.type)}</strong>
-        </Alert>
-      </Grid>
+      <DisplayStatus sum={sum} />
       <Grid item xs={8} className={classes.table}>
-        <DisplayTable trans={props.transactionBody} updateArr={updateArr} />
+        <DisplayTable
+          updateSum={updateSum}
+          trans={props.transactionBody}
+          updateArr={updateArr}
+        />
       </Grid>
-      <Grid item xs={2}></Grid>
+      <Grid item xs={2}>
+        <DisplayCurrency />
+      </Grid>
     </Grid>
   );
 });

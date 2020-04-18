@@ -6,10 +6,28 @@ const db = require('./DB');
 
 export default function MaterialTableDemo(props) {
   var dataDb = [];
+  var sumAdd = 0;
+  var sumMinus = 0;
+  var sumTotal = 0;
+  const [flagUpdate, setFlagUpdate] = React.useState(0);
   const [state, setState] = React.useState({
     columns: db.columns,
     data: dataDb,
   });
+
+  useEffect(() => {
+    console.log('hi you in useafeect this is the data:');
+    console.log(state.data);
+    state.data.map((x) => {
+      if (x.type === 'Add') sumAdd += x.amount;
+      if (x.type === 'Minus') sumMinus += x.amount;
+    });
+    sumTotal = sumAdd - sumMinus;
+
+    var sum = { Add: sumAdd, Minus: sumMinus, Total: sumTotal };
+    props.updateSum(sum);
+  }, [state]);
+
   let requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
@@ -25,6 +43,16 @@ export default function MaterialTableDemo(props) {
       })
       .then((data) => {
         dataDb = data.result;
+        console.log(dataDb);
+        dataDb.map((x) => {
+          if (x.type === 'Add') sumAdd += x.amount;
+          if (x.type === 'Minus') sumMinus += x.amount;
+        });
+        sumTotal = sumAdd - sumMinus;
+
+        var sum = { Add: sumAdd, Minus: sumMinus, Total: sumTotal };
+        props.updateSum(sum);
+
         setState({ columns: db.columns, data: dataDb.reverse() });
       });
   }, []);
@@ -110,7 +138,9 @@ export default function MaterialTableDemo(props) {
                   const data = [...prevState.data];
                   data[data.indexOf(oldData)] = newData;
                   console.log('this is newdata:');
-                  console.log(newData);
+                  console.log(newData.amount);
+                  let num = newData.amount;
+                  newData.amount = Number(num);
                   fetch('http://localhost:8000/updateData', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -127,12 +157,13 @@ export default function MaterialTableDemo(props) {
               resolve();
               setState((prevState) => {
                 const data = [...prevState.data];
-                console.log(oldData);
                 fetch(`http://localhost:8000/deleteData/${oldData._id}`, {
                   method: 'Delete',
                   headers: { 'Content-Type': 'application/json' },
                 });
                 data.splice(data.indexOf(oldData), 1);
+                setFlagUpdate(1);
+                console.log(flagUpdate);
                 return { ...prevState, data };
               });
             }, 600);

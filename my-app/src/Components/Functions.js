@@ -13,37 +13,6 @@ import Form from './Form';
 
 import { makeMaskFromFormat } from '@material-ui/pickers/_helpers/text-field-helper';
 
-// background-color: #deebdd;
-// background-image: linear-gradient(315deg, #deebdd 0%, #bbdbbe 74%);
-// background-color: #3bb78f;
-// background-image: linear-gradient(315deg, #3bb78f 0%, #0bab64 74%);
-// background-color: #63a4ff;
-// background-image: linear-gradient(315deg, #63a4ff 0%, #83eaf1 74%);
-// const useStyles = makeStyles(theme => ({
-//   button: {
-//     width: '500px',
-//     height: '100px',
-//     backgroundColor: 'white',
-//     padding: theme.spacing(1),
-//     textAlign: 'center',
-//     color: theme.palette.text.secondary,
-//     whiteSpace: 'nowrap',
-//     marginBottom: theme.spacing(1)
-//   },
-//   paper: {
-//     width: '500px',
-//     height: '500px',
-//     backgroundColor: 'white',
-//     padding: theme.spacing(1),
-//     textAlign: 'center',
-//     color: theme.palette.text.secondary,
-//     whiteSpace: 'nowrap',
-//     marginBottom: theme.spacing(1)
-//   },
-//   divider: {
-//     margin: theme.spacing(2, 0)
-//   }
-// }));
 const useStyles = makeStyles({
   root: {
     padding: '20px',
