@@ -17,34 +17,35 @@ import Form from './Components/Form';
 // background-color: #0cbaba;
 // background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   try: {
-    // height: 100%,
-    // height: 100% ,
-    background: 'linear-gradient(315deg, #0cbaba 0%, #380036 74%)'
+    minHeight: '100vh',
+    // maxHeight: '100%',
+    // width: '100%',
+    background: 'linear-gradient(315deg, #0cbaba 0%, #380036 74%)',
   },
   container: {
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
-    gridGap: theme.spacing(3)
+    gridGap: theme.spacing(3),
   },
   paper: {
     padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
     whiteSpace: 'nowrap',
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
   },
   divider: {
-    margin: theme.spacing(2, 0)
-  }
+    margin: theme.spacing(2, 0),
+  },
 }));
 
 function App() {
   const classes = useStyles();
   return (
     <div>
-      <Box height='100%' className={classes.try}>
+      <Box className={classes.try}>
         <Header />
 
         <Body />

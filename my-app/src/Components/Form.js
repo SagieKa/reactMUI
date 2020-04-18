@@ -6,7 +6,7 @@ import { Grid, Input } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Icon from '@material-ui/core/Icon';
 import axios from 'axios';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import BasicDatePicker from './FormDate';
 import UploadButtons from './FormUpload';
@@ -202,6 +202,7 @@ export default function Form(props) {
           <Grid container className={classes.end}>
             <Grid item xs={4}></Grid>
             <UploadButtons updateFile={updateFile} />
+
             <Grid item xs={4}>
               <Button
                 variant='contained'

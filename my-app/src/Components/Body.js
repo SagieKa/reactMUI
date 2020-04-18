@@ -19,6 +19,8 @@ const db = require('./DB');
 
 const useStyles = makeStyles((theme) => ({
   try: {
+    width: '100%',
+    height: '100%',
     background: 'linear-gradient(315deg, #63d471 0%, #233329 74%)',
   },
   container: {
@@ -53,8 +55,11 @@ function Body(props) {
   }, [transactionBody]);
 
   const getTransBody = (trans) => {
-    var array = [...transactionBody];
+    var array = [];
     array.push(trans);
+    array.push(...transactionBody);
+    // var array = [...transactionBody];
+    // array.push(trans);
     setTransactionBody([trans]);
   };
 

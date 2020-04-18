@@ -45,7 +45,12 @@ import { makeMaskFromFormat } from '@material-ui/pickers/_helpers/text-field-hel
 //   }
 // }));
 const useStyles = makeStyles({
-  root: { padding: 10, marginBottom: 10, marginTop: 20 },
+  root: {
+    padding: '20px',
+    borderRadius: '25px',
+    marginBottom: 10,
+    marginTop: 20,
+  },
 });
 
 function Functions(props) {
@@ -78,7 +83,8 @@ function Functions(props) {
 
   return (
     <Grid container>
-      <Grid item xs={12}>
+      <Grid item xs={2}></Grid>
+      <Grid item xs={8}>
         <BottomNavigation
           value={value}
           onChange={(event, newValue) => {
@@ -89,7 +95,6 @@ function Functions(props) {
           className={classes.root}
         >
           <BottomNavigationAction
-            on
             onClick={handelPlus}
             label='Add'
             icon={<TrendingUp />}
@@ -108,6 +113,7 @@ function Functions(props) {
           />
         </BottomNavigation>
       </Grid>
+      <Grid item xs={2}></Grid>
       {showMEPlus ? (
         <Grid item xs={12}>
           <Form getTrans={getTrans} type={'Add'} />

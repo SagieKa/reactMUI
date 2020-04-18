@@ -8,6 +8,7 @@ import {
 } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { Alert, AlertTitle } from '@material-ui/lab';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
@@ -17,6 +18,10 @@ import Functions from './Functions';
 import { Button, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
+  table: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+  },
   try: {
     background: 'linear-gradient(315deg, #63d471 0%, #233329 74%)',
   },
@@ -26,16 +31,25 @@ const useStyles = makeStyles((theme) => ({
     gridGap: theme.spacing(3),
   },
   paper: {
-    width: '900',
-    height: '500px',
+    width: '400',
+    height: '250px',
     padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
     whiteSpace: 'nowrap',
-    marginBottom: theme.spacing(50),
+    // marginBottom: theme.spacing(50),
   },
   divider: {
     margin: theme.spacing(2, 0),
+  },
+  alerts: {
+    marginRight: theme.spacing(1),
+    marginLeft: theme.spacing(1),
+    marginTop: theme.spacing(3),
+    borderRadius: '25px',
+    textAlign: 'center',
+    // width: '200px',
+    height: '200px',
   },
 }));
 
@@ -55,33 +69,25 @@ const Display = forwardRef((props, ref) => {
 
   return (
     <Grid container>
-      <Grid item xs={1}>
-        <Paper className={classes.paper}>updates</Paper>
+      <Grid item xs={2}>
+        <Alert severity='info' className={classes.alerts}>
+          <AlertTitle>Your acoount</AlertTitle>
+          <strong>1000$</strong>
+        </Alert>
+        <Alert severity='error' className={classes.alerts}>
+          <AlertTitle>All Minus</AlertTitle>
+          <strong>5000$</strong>
+        </Alert>
+        <Alert severity='success' className={classes.alerts}>
+          <AlertTitle>All Plus</AlertTitle>
+          <strong>6000$</strong>
+          <strong>{updateArr.map((x) => x.type)}</strong>
+        </Alert>
       </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={8} className={classes.table}>
         <DisplayTable trans={props.transactionBody} updateArr={updateArr} />
-        {/* <Paper className={classes.paper}>
-          what you add is here
-          <button type='button' onClick={clicki}>
-            clicki
-          </button>
-          <h1>
-            here: {trans}
-            {props.transactionBody.map((item) => (
-              <h3>{item.type}</h3>
-            ))}
-          </h1>
-          <h1>
-            here: {trans}
-            {updateArr.map((item) => (
-              <h3>{item.amount}</h3>
-            ))}
-          </h1>
-        </Paper> */}
       </Grid>
-      <Grid item xs={1}>
-        <Paper className={classes.paper}>updates</Paper>
-      </Grid>
+      <Grid item xs={2}></Grid>
     </Grid>
   );
 });
