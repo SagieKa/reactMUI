@@ -35,7 +35,7 @@ const columns = [
   { title: 'Time of Transaction', field: 'timeDate', type: 'date' },
   { title: 'Time of Hour Transaction', field: 'timeHour', type: 'date' },
   { title: 'Date', field: 'timeDateNow', type: 'date' },
-  { title: 'File', field: 'file' },
+  // { title: 'File', field: 'file' },
 ];
 const result = [data, columns];
 
