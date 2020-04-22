@@ -20,6 +20,7 @@ var cookieParser = require('cookie-parser');
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/img')));
 // mongoose.connect('mongodb://localhost:27017/myDb', { useNewUrlParser: true });
 
 // var db = mongoose.connection;

@@ -7,14 +7,12 @@ import {
   forwardRef,
 } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Divider from '@material-ui/core/Divider';
+
 import Grid from '@material-ui/core/Grid';
-import Form from './Form';
+
 import Functions from './Functions';
 import Display from './Display';
-import { Button, Box } from '@material-ui/core';
+
 const db = require('./DB');
 
 const useStyles = makeStyles((theme) => ({

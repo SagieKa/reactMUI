@@ -7,43 +7,45 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import { red } from '@material-ui/core/colors';
+
 import Grid from '@material-ui/core/Grid';
-import { fromUnixTime } from 'date-fns';
+
 // background-color #7cffcb;
 // background-image linear-gradient(315deg, #7cffcb 0%, #74f2ce 74%);
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   try: {
     // background: 'linear-gradient(45deg, #216353 30%, #75daad 0%)'
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
+    // background:
+    //   'linear-gradient(90deg, rgba(243,255,81,1) 34%, rgba(0,212,255,1) 100%)',
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
   },
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
     display: 'none',
     [theme.breakpoints.up('sm')]: {
-      display: 'block'
-    }
+      display: 'block',
+    },
   },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
+      backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(1),
-      width: 'auto'
-    }
+      width: 'auto',
+    },
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -52,10 +54,10 @@ const useStyles = makeStyles(theme => ({
     pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   inputRoot: {
-    color: 'gray'
+    color: 'gray',
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -66,10 +68,10 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       width: '12ch',
       '&:focus': {
-        width: '20ch'
-      }
-    }
-  }
+        width: '20ch',
+      },
+    },
+  },
 }));
 
 export default function Header() {
@@ -99,7 +101,7 @@ export default function Header() {
                 placeholder='Search…'
                 classes={{
                   root: classes.inputRoot,
-                  input: classes.inputInput
+                  input: classes.inputInput,
                 }}
                 inputProps={{ 'aria-label': 'search' }}
               />

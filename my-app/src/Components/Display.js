@@ -8,16 +8,9 @@ import {
 } from 'react';
 import DisplayStatus from './DisplayStatus';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import { Alert, AlertTitle } from '@material-ui/lab';
-import Paper from '@material-ui/core/Paper';
-import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import DisplayTable from './DisplayTable';
 import DisplayCurrency from './DisplayCurrency';
-import Form from './Form';
-import Functions from './Functions';
-import { Button, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -82,7 +75,7 @@ const Display = forwardRef((props, ref) => {
 
   return (
     <Grid container>
-      <DisplayStatus sum={sum} />
+      <DisplayCurrency />
       <Grid item xs={8} className={classes.table}>
         <DisplayTable
           updateSum={updateSum}
@@ -90,9 +83,7 @@ const Display = forwardRef((props, ref) => {
           updateArr={updateArr}
         />
       </Grid>
-      <Grid item xs={2}>
-        <DisplayCurrency />
-      </Grid>
+      <DisplayStatus sum={sum} />
     </Grid>
   );
 });

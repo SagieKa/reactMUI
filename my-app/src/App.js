@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100vh',
     // maxHeight: '100%',
     // width: '100%',
+    // backgroundColor: '#f0f0f0',
     background: 'linear-gradient(315deg, #0cbaba 0%, #380036 74%)',
   },
   container: {

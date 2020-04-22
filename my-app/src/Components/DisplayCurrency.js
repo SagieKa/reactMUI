@@ -1,27 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import MoneyIcon from '@material-ui/icons/Money';
-import IconButton from '@material-ui/core/IconButton';
-import Paper from '@material-ui/core/Paper';
-import AccountBalanceRoundedIcon from '@material-ui/icons/AccountBalanceRounded';
-import Fab from '@material-ui/core/Fab';
+import Grid from '@material-ui/core/Grid';
+import { Alert, AlertTitle } from '@material-ui/lab';
 import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import Avatar from '@material-ui/core/Avatar';
-import MenuIcon from '@material-ui/icons/Menu';
-import AddIcon from '@material-ui/icons/Add';
-import SearchIcon from '@material-ui/icons/Search';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import axios from 'axios';
 
+var img1 = '20161128_223548.jpg';
 let requestOptions = {
   method: 'GET',
   headers: { 'Content-Type': 'application/json' },
@@ -35,7 +19,7 @@ const getCurrency = fetch('http://localhost:8000/getCurrency', requestOptions)
     return res.json();
   })
   .then((data) => {
-    currency = data.result.slice(0, 7);
+    currency = data.result.slice(0, 4);
     console.log(data.result);
   });
 
@@ -51,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
 
     // color: '#ffa31a',
-    minHeight: '650px',
+    maxHeight: '550px',
     borderRadius: 3,
     borderRadius: '25px',
     textAlign: 'center',
@@ -61,19 +45,34 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     // borderRadius: '40px',
   },
-  list: {
-    marginBottom: theme.spacing(2),
+  alerts: {
+    marginRight: theme.spacing(1),
+    marginLeft: theme.spacing(1),
+    marginTop: theme.spacing(3),
   },
 }));
 
 export default function DisplayCurrency() {
   const classes = useStyles();
   var count = 0;
-
+  var name = '';
+  var name2 = '';
+  var imgMap = '';
   return (
-    <React.Fragment>
-      {/* <CssBaseline /> */}
-      <Paper square className={classes.paper}>
+    // <React.Fragment>
+    <Grid item xs={2}>
+      {currency.map(({ NAME, RATE, CURRENCYCODE }) => (
+        <Alert icon={false} severity='warning' className={classes.alerts}>
+          <AlertTitle>
+            <Avatar alt='Remy Sharp' src={'img/' + { NAME }.NAME + '.png'} />
+          </AlertTitle>
+          <Divider />
+          {NAME} - {CURRENCYCODE}:<strong>{RATE}</strong>
+        </Alert>
+      ))}
+    </Grid>
+
+    /* <Paper square className={classes.paper}>
         <Typography className={classes.text} variant='h5' gutterBottom>
           <strong>
             Currency-News <AccountBalanceRoundedIcon />
@@ -105,6 +104,6 @@ export default function DisplayCurrency() {
           ))}
         </List>
       </Paper>
-    </React.Fragment>
+    </React.Fragment> */
   );
 }

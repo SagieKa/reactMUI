@@ -2,11 +2,8 @@ import React from 'react';
 
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { Grid, Input } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
-import Icon from '@material-ui/core/Icon';
-import axios from 'axios';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import BasicDatePicker from './FormDate';
 import UploadButtons from './FormUpload';
@@ -18,24 +15,30 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '60px',
     marginTop: 20,
     textAlign: 'center',
+    // direction: 'right',
     marginBottom: 20,
     '& .MuiTextField-root': {
       margin: theme.spacing(2),
       width: '20ch',
     },
   },
+  try: {
+    textAlign: 'right',
+    direction: 'right',
+  },
   grid: {
     marginBottom: 8,
+    // direction: 'rtl',
   },
   end: { margin: 5 },
 }));
 
 const banks = [
   {
-    name: 'OsharHyal',
+    name: 'אוצר החייל',
   },
-  { name: 'Leomi' },
-  { name: 'Hapoalim' },
+  { name: 'לאומי' },
+  { name: 'בנק הפועלים' },
 ];
 const currencies = [
   {
@@ -140,19 +143,22 @@ export default function Form(props) {
             <div>
               <TextField
                 id='standard-multiline-flexible'
-                label='Amount'
+                label='סכום'
                 multiline
                 rowsMax='4'
+                textAlign='center'
                 value={value}
+                className={classes.try}
                 onChange={handleAmount}
               />
               <TextField
+                textAlign='right'
                 id='standard-select-currency'
                 select
-                label='Select'
+                label='בחירה מטבע'
                 value={currency}
                 onChange={handleCurrency}
-                helperText='Please select your currency'
+                helperText='בחר את המטבע הרצוי'
               >
                 {currencies.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
@@ -163,10 +169,10 @@ export default function Form(props) {
               <TextField
                 id='standard-select-currency'
                 select
-                label='Select'
+                label='בחר בנק'
                 value={bank}
                 onChange={handleBank}
-                helperText='Please select your Bank'
+                helperText='בחר את הבנק הרצוי'
               >
                 {banks.map((bank) => (
                   <MenuItem key={bank.name} value={bank.name}>
@@ -175,9 +181,8 @@ export default function Form(props) {
                 ))}
               </TextField>
               <TextField
-                id='standard-textarea'
-                label='Subject of Amount'
-                placeholder='Placeholder'
+                id='standard-multiline-flexible'
+                label='רשום נושא '
                 multiline
                 onChange={handleSubject}
               />
@@ -188,7 +193,7 @@ export default function Form(props) {
               <TextField
                 disabled
                 id='standard-multiline-flexible'
-                label='Type'
+                label='סוג טרזנקציה'
                 multiline
                 rowsMax='4'
                 value={props.type}
@@ -203,9 +208,6 @@ export default function Form(props) {
             </div>
           </Grid>
           <Grid container className={classes.end}>
-            <Grid item xs={4}></Grid>
-            <UploadButtons updateFile={updateFile} />
-
             <Grid item xs={4}>
               <Button
                 variant='contained'
@@ -215,9 +217,11 @@ export default function Form(props) {
                   return false;
                 }}
               >
-                Save
+                שלח
               </Button>
             </Grid>
+            <UploadButtons updateFile={updateFile} />
+            <Grid item xs={4}></Grid>
           </Grid>
           <Grid container></Grid>
         </form>

@@ -9,17 +9,11 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import AlarmAddOutlinedIcon from '@material-ui/icons/AlarmAddOutlined';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
-import Paper from '@material-ui/core/Paper';
-import Divider from '@material-ui/core/Divider';
+
 import Grid from '@material-ui/core/Grid';
-import DisplayTable from './DisplayTable';
-import Form from './Form';
-import Functions from './Functions';
-import { Button, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -36,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     width: '400',
-    height: '250px',
+    height: '100px',
     padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
@@ -56,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     border: 0,
     borderRadius: 3,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    height: '200px',
+    height: '120px',
   },
 }));
 
@@ -67,23 +61,24 @@ export default function DisplayStatus(props) {
   return (
     <Grid item xs={2}>
       <Alert severity='info' className={classes.alerts}>
-        <AlertTitle>Your acoount</AlertTitle>
-        <Typography variant='h4' gutterBottom>
+        <AlertTitle>מצב חשבון</AlertTitle>
+        <Typography variant='h5' gutterBottom>
           <ImportExportIcon fontSize='large' />
-          <strong>{props.sum.Total}‏ ₪</strong>
+          <strong>{props.sum.Total.toLocaleString()}‏ ₪</strong>
         </Typography>
       </Alert>
       <Alert severity='success' className={classes.alerts}>
-        <AlertTitle>All Plus</AlertTitle>
-        <Typography variant='h4' gutterBottom>
-          <ThumbUpIcon fontSize='large' /> <strong>{props.sum.Add} ₪</strong>
+        <AlertTitle>הכנסות</AlertTitle>
+        <Typography variant='h5' gutterBottom>
+          <ThumbUpIcon fontSize='large' />{' '}
+          <strong>{props.sum.Add.toLocaleString()} ₪</strong>
         </Typography>
       </Alert>
       <Alert severity='error' className={classes.alerts}>
-        <AlertTitle>All Minus</AlertTitle>
-        <Typography variant='h4' gutterBottom>
+        <AlertTitle>הוצאות</AlertTitle>
+        <Typography variant='h5' gutterBottom>
           <ThumbDownIcon fontSize='large' />{' '}
-          <strong>{props.sum.Minus} ₪</strong>
+          <strong>{props.sum.Minus.toLocaleString()} ₪</strong>
         </Typography>
       </Alert>
     </Grid>

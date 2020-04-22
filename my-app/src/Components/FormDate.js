@@ -1,11 +1,10 @@
 import 'date-fns';
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
-  KeyboardDatePicker
+  KeyboardDatePicker,
 } from '@material-ui/pickers';
 
 export default function MaterialUIPickers(props) {
@@ -14,15 +13,15 @@ export default function MaterialUIPickers(props) {
   const [selectedHour, setSelectedHour] = React.useState(new Date());
   const [selectedDateChose, setSelectedDateChose] = React.useState(new Date());
 
-  const handleDateChange = date => {
+  const handleDateChange = (date) => {
     setSelectedDate(date);
     props.updateDateNow(selectedDate);
   };
-  const handleHourChange = date => {
+  const handleHourChange = (date) => {
     setSelectedHour(date);
     props.updateHour(selectedHour);
   };
-  const handleDateChangeChose = date => {
+  const handleDateChangeChose = (date) => {
     setSelectedDateChose(date);
     props.updateDate(date);
   };
@@ -36,32 +35,32 @@ export default function MaterialUIPickers(props) {
         format='MM/dd/yyyy'
         margin='normal'
         id='date-picker-inline'
-        label='Date Today'
+        label='תאריך ההכנסה'
         value={selectedDate}
         onChange={handleDateChange}
         KeyboardButtonProps={{
-          'aria-label': 'change date'
+          'aria-label': 'change date',
         }}
       />
       <KeyboardDatePicker
         margin='normal'
         id='date-picker-dialog'
-        label='Date Of Function'
+        label='תאריך הטרנזקציה'
         format='MM/dd/yyyy'
         value={selectedDateChose}
         onChange={handleDateChangeChose}
         KeyboardButtonProps={{
-          'aria-label': 'change date'
+          'aria-label': 'change date',
         }}
       />
       <KeyboardTimePicker
         margin='normal'
         id='time-picker'
-        label='Time Of Function'
+        label='שעת הטרנזקציה'
         value={selectedHour}
         onChange={handleHourChange}
         KeyboardButtonProps={{
-          'aria-label': 'change time'
+          'aria-label': 'change time',
         }}
       />
     </MuiPickersUtilsProvider>

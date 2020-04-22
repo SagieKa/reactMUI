@@ -5,6 +5,7 @@ const transaction = new mongoose.Schema({
   subject: { type: String },
   amount: { type: Number },
   currency: { type: String },
+  bank: { type: String },
   timeDate: { type: Date },
   timeHour: { type: Date },
   timeDateNow: { type: Date },

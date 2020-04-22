@@ -70,38 +70,53 @@ export default function MaterialTableDemo(props) {
         borderRadius: '25px',
         padding: '20px',
         boxShadow: ' 0 4px 90px 0 rgba(0, 0, 0, 0.2)',
+        direction: 'right',
+        textAlign: 'right',
       }}
-      icons={{
-        Add: (props) => {
-          return (
-            <div>
-              <i className='fa fa-plus'></i> add cheack
-            </div>
-          );
-        },
-      }}
+      icons={
+        {
+          // Add: (props) => {
+          //   return (
+          //     <div>
+          //       <i className='fa fa-plus'></i> add cheack
+          //     </div>
+          //   );
+          // },
+        }
+      }
       localization={{
         pagination: {
+          labelRowsSelect: 'שורות',
           labelDisplayedRows: '{count} of {to}-{from} ',
         },
+        header: { actions: 'פעולות' },
+        toolbar: { searchPlaceholder: '...חפש' },
       }}
-      title='Transactions'
+      title='טרנזקציות'
       columns={state.columns}
       data={state.data}
       options={{
-        actionsColumnIndex: -1,
+        showTitle: false,
+        search: true,
+        searchFieldAlignment: 'left',
+
+        // actionsColumnIndex: -1,
 
         rowStyle: (rowData) => {
           if (rowData.type === 'Add') {
             return {
               background:
-                ' linear-gradient(90deg, rgba(190,255,224,1) 31%, rgba(250,255,253,0.7987570028011204) 100%)',
+                ' linear-gradient(90deg, rgba(81,255,156,0.4489146000196954) 55%, rgba(81,255,156,0.2612395299916842) 80%)',
+              // ' linear-gradient(90deg, rgba(190,255,224,1) 31%, rgba(250,255,253,0.7987570028011204) 100%)',
             };
           }
           if (rowData.type === 'Minus') {
             return {
               background:
-                'linear-gradient( 89.5deg,  rgba(246,114,128,1) 0.2%, rgba(248,177,149,1) 90.6% )',
+                'linear-gradient(90deg, rgba(250,78,78,1) 55%, rgba(250,78,78,0.7906512946975666) 80%)',
+              //   'linear-gradient(90deg, rgba(250,78,78,1) 55%, rgba(250,78,78,0.7234244039412641) 80%)',
+              // background:
+              //   'linear-gradient( 89.5deg,  rgba(246,114,128,1) 0.2%, rgba(248,177,149,1) 90.6% )',
             };
           }
 
@@ -118,17 +133,6 @@ export default function MaterialTableDemo(props) {
         },
       ]}
       editable={{
-        onRowAdd: (newData) =>
-          new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-              setState((prevState) => {
-                const data = [...prevState.data];
-                data.push(newData);
-                return { ...prevState, data };
-              });
-            }, 600);
-          }),
         onRowUpdate: (newData, oldData) =>
           new Promise((resolve) => {
             setTimeout(() => {

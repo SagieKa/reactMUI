@@ -1,17 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import { Divider, Button } from '@material-ui/core';
+
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import TrendingUp from '@material-ui/icons/TrendingUp';
 import TrendingDown from '@material-ui/icons/TrendingDown';
 import BuildIcon from '@material-ui/icons/Build';
 import Form from './Form';
-
-import { makeMaskFromFormat } from '@material-ui/pickers/_helpers/text-field-helper';
 
 const useStyles = makeStyles({
   root: {
@@ -24,7 +20,7 @@ const useStyles = makeStyles({
 
 function Functions(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(2);
   const [showMEPlus, setshowMEPlus] = React.useState(false);
   const [showMEMinus, setshowMEMinus] = React.useState(false);
   const [transaction, setTransaction] = React.useState('');
@@ -59,26 +55,24 @@ function Functions(props) {
           onChange={(event, newValue) => {
             setValue(newValue);
           }}
-          // onClick={alert('hi')}
           showLabels
           className={classes.root}
         >
           <BottomNavigationAction
+            label='אחר'
             onClick={handelPlus}
-            label='Add'
-            icon={<TrendingUp />}
+            icon={<BuildIcon />}
           />
 
           <BottomNavigationAction
-            label='Minus'
+            label='הוצאה'
             onClick={handelMinus}
             icon={<TrendingDown />}
           />
-
           <BottomNavigationAction
-            label='Another'
             onClick={handelPlus}
-            icon={<BuildIcon />}
+            label='הכנסה'
+            icon={<TrendingUp />}
           />
         </BottomNavigation>
       </Grid>
