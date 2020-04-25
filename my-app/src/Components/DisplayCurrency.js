@@ -1,20 +1,20 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import { Alert, AlertTitle } from '@material-ui/lab';
-import Divider from '@material-ui/core/Divider';
-import Avatar from '@material-ui/core/Avatar';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import { Alert, AlertTitle } from "@material-ui/lab";
+import Divider from "@material-ui/core/Divider";
+import Avatar from "@material-ui/core/Avatar";
 
-var img1 = '20161128_223548.jpg';
+var img1 = "20161128_223548.jpg";
 let requestOptions = {
-  method: 'GET',
-  headers: { 'Content-Type': 'application/json' },
+  method: "GET",
+  headers: { "Content-Type": "application/json" },
 };
 const text = {
-  color: 'red',
+  color: "red",
 };
 var currency = [];
-const getCurrency = fetch('http://localhost:8000/getCurrency', requestOptions)
+const getCurrency = fetch("http://localhost:8000/getCurrency", requestOptions)
   .then((res) => {
     return res.json();
   })
@@ -27,22 +27,22 @@ const useStyles = makeStyles((theme) => ({
   text: {
     padding: theme.spacing(2, 2, 0),
   },
-  text: { color: '#808080' },
+  text: { color: "#808080" },
   paper: {
-    backgroundColor: '#ffd699',
+    backgroundColor: "#ffd699",
     marginRight: theme.spacing(1),
     marginLeft: theme.spacing(1),
     marginTop: theme.spacing(3),
 
     // color: '#ffa31a',
-    maxHeight: '550px',
+    maxHeight: "550px",
     borderRadius: 3,
-    borderRadius: '25px',
-    textAlign: 'center',
+    borderRadius: "25px",
+    textAlign: "center",
     border: 0,
-    position: 'sticky',
+    position: "sticky",
     borderRadius: 3,
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     // borderRadius: '40px',
   },
   alerts: {
@@ -55,16 +55,17 @@ const useStyles = makeStyles((theme) => ({
 export default function DisplayCurrency() {
   const classes = useStyles();
   var count = 0;
-  var name = '';
-  var name2 = '';
-  var imgMap = '';
+  var name = "";
+  var name2 = "";
+  var imgMap = "";
+
   return (
     // <React.Fragment>
     <Grid item xs={2}>
       {currency.map(({ NAME, RATE, CURRENCYCODE }) => (
-        <Alert icon={false} severity='warning' className={classes.alerts}>
+        <Alert icon={false} severity="warning" className={classes.alerts}>
           <AlertTitle>
-            <Avatar alt='Remy Sharp' src={'img/' + { NAME }.NAME + '.png'} />
+            <Avatar alt="Remy Sharp" src={"img/" + { NAME }.NAME + ".png"} />
           </AlertTitle>
           <Divider />
           {NAME} - {CURRENCYCODE}:<strong>{RATE}</strong>

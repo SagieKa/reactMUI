@@ -1,15 +1,15 @@
 const data = [];
 
 const columnsRev = [
-  { title: 'סוג', field: 'type' },
-  // { title: 'nisoy', field: 'type' + 'subject' },
-  { title: 'נושא', field: 'subject' },
-  { title: 'סכום', field: 'amount' },
-  { title: 'סוג מטבע', field: 'currency' },
-  { title: 'בנק', field: 'bank' },
-  { title: 'זמן העסקה', field: 'timeDate', type: 'date' },
-  { title: 'שעת העסקה', field: 'timeHour', type: 'date' },
-  { title: 'תאריך', field: 'timeDateNow', type: 'date' },
+  { title: "סוג", field: "type" },
+  { title: "סכום שערוך", field: "ilsAmount" },
+  { title: "נושא", field: "subject" },
+  { title: "סכום", field: "amount" },
+  { title: "סוג מטבע", field: "currency" },
+  { title: "בנק", field: "bank" },
+  { title: "זמן העסקה", field: "timeDate", type: "date" },
+  { title: "שעת העסקה", field: "timeHour", type: "date" },
+  { title: "תאריך", field: "timeDateNow", type: "date" },
   // { title: 'File', field: 'file' },
 ];
 const columns = columnsRev.reverse();

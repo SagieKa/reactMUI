@@ -1,10 +1,11 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const transaction = new mongoose.Schema({
   type: { type: String },
   subject: { type: String },
   amount: { type: Number },
   currency: { type: String },
+  ilsAmount: { type: Number },
   bank: { type: String },
   timeDate: { type: Date },
   timeHour: { type: Date },
@@ -12,4 +13,4 @@ const transaction = new mongoose.Schema({
   file: { type: String },
 });
 
-module.exports = Transaction = mongoose.model('transactions', transaction);
+module.exports = Transaction = mongoose.model("transactions", transaction);
