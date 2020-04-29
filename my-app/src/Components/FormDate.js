@@ -53,16 +53,6 @@ export default function MaterialUIPickers(props) {
           'aria-label': 'change date',
         }}
       />
-      <KeyboardTimePicker
-        margin='normal'
-        id='time-picker'
-        label='שעת הטרנזקציה'
-        value={selectedHour}
-        onChange={handleHourChange}
-        KeyboardButtonProps={{
-          'aria-label': 'change time',
-        }}
-      />
     </MuiPickersUtilsProvider>
   );
 }

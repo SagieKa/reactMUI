@@ -1,18 +1,19 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import TrendingUp from "@material-ui/icons/TrendingUp";
-import TrendingDown from "@material-ui/icons/TrendingDown";
-import BuildIcon from "@material-ui/icons/Build";
-import Form from "./Form";
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import TrendingUp from '@material-ui/icons/TrendingUp';
+import TrendingDown from '@material-ui/icons/TrendingDown';
+import BuildIcon from '@material-ui/icons/Build';
+import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
+import Form from './Form';
 
 const useStyles = makeStyles({
   root: {
-    padding: "20px",
-    borderRadius: "25px",
+    padding: '20px',
+    borderRadius: '25px',
     marginBottom: 10,
     marginTop: 20,
   },
@@ -24,7 +25,7 @@ function Functions(props) {
   const [showMEPlus, setshowMEPlus] = React.useState(false);
   const [showMEHashkha, setshowMEHashkha] = React.useState(false);
   const [showMEMinus, setshowMEMinus] = React.useState(false);
-  const [transaction, setTransaction] = React.useState("");
+  const [transaction, setTransaction] = React.useState('');
 
   function handelHashkha(e) {
     if (!showMEHashkha) {
@@ -55,6 +56,9 @@ function Functions(props) {
   }
   const getTrans = (trans) => {
     setTransaction(trans);
+    setshowMEHashkha(false);
+    setshowMEPlus(false);
+    setshowMEMinus(false);
     props.getTransBody(trans);
   };
 
@@ -71,24 +75,24 @@ function Functions(props) {
           className={classes.root}
         >
           <BottomNavigationAction
-            label="אחר"
+            label='אחר'
             onClick={handelHashkha}
             icon={<BuildIcon />}
           />
           <BottomNavigationAction
-            label="סכום השקעה"
+            label='סכום השקעה'
             onClick={handelHashkha}
-            icon={<BuildIcon />}
+            icon={<BusinessCenterIcon />}
           />
 
           <BottomNavigationAction
-            label="הוצאה"
+            label='הוצאה'
             onClick={handelMinus}
             icon={<TrendingDown />}
           />
           <BottomNavigationAction
             onClick={handelPlus}
-            label="הכנסה"
+            label='הכנסה'
             icon={<TrendingUp />}
           />
         </BottomNavigation>
@@ -96,24 +100,24 @@ function Functions(props) {
       <Grid item xs={2}></Grid>
       {showMEPlus ? (
         <Grid item xs={12}>
-          <Form getTrans={getTrans} type={"הכנסה"} />
+          <Form getTrans={getTrans} type={'הכנסה'} />
         </Grid>
       ) : (
-        ""
+        ''
       )}
       {showMEHashkha ? (
         <Grid item xs={12}>
-          <Form getTrans={getTrans} type={"סכום השקעה"} />
+          <Form getTrans={getTrans} type={'סכום השקעה'} />
         </Grid>
       ) : (
-        ""
+        ''
       )}
       {showMEMinus ? (
         <Grid item xs={12}>
-          <Form getTrans={getTrans} type={"הוצאה"} />
+          <Form getTrans={getTrans} type={'הוצאה'} />
         </Grid>
       ) : (
-        ""
+        ''
       )}
     </Grid>
   );
