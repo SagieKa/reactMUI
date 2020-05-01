@@ -1,31 +1,31 @@
-import React from 'react';
+import React from "react";
 
-import { makeStyles, withTheme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import { Grid } from '@material-ui/core';
-import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
-import BasicDatePicker from './FormDate';
-import UploadButtons from './FormUpload';
-import SaveIcon from '@material-ui/icons/Save';
+import { makeStyles, withTheme } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import { Grid } from "@material-ui/core";
+import MenuItem from "@material-ui/core/MenuItem";
+import Button from "@material-ui/core/Button";
+import BasicDatePicker from "./FormDate";
+import UploadButtons from "./FormUpload";
+import SaveIcon from "@material-ui/icons/Save";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: 'white',
-    boxShadow: ' 0 4px 90px 0 rgba(0, 0, 0, 0.2)',
-    borderRadius: '60px',
+    backgroundColor: "white",
+    boxShadow: " 0 4px 90px 0 rgba(0, 0, 0, 0.2)",
+    borderRadius: "60px",
     marginTop: 20,
-    textAlign: 'center',
+    textAlign: "center",
     // direction: 'right',
     marginBottom: 20,
-    '& .MuiTextField-root': {
+    "& .MuiTextField-root": {
       margin: theme.spacing(2),
-      width: '20ch',
+      width: "20ch",
     },
   },
   try: {
-    textAlign: 'right',
-    direction: 'right',
+    textAlign: "right",
+    direction: "right",
   },
   grid: {
     marginBottom: 8,
@@ -36,51 +36,51 @@ const useStyles = makeStyles((theme) => ({
 
 const banks = [
   {
-    name: 'אוצר החייל',
+    name: "אוצר החייל",
   },
-  { name: 'לאומי' },
-  { name: 'בנק הפועלים' },
+  { name: "לאומי" },
+  { name: "בנק הפועלים" },
 ];
 const currencies = [
   {
-    value: 'ILS',
-    label: '₪',
-    id: '0',
+    value: "ILS",
+    label: "₪",
+    id: "0",
   },
   {
-    value: 'USD',
-    label: '$',
-    id: '01',
+    value: "USD",
+    label: "$",
+    id: "01",
   },
   {
-    value: 'EUR',
-    label: '€',
-    id: '27',
+    value: "EUR",
+    label: "€",
+    id: "27",
   },
   {
-    value: 'GBP',
-    label: '£',
-    id: '02',
+    value: "GBP",
+    label: "£",
+    id: "02",
   },
   {
-    value: 'JPY',
-    label: '¥',
-    id: '03',
+    value: "JPY",
+    label: "¥",
+    id: "03",
   },
 ];
 
 export default function Form(props) {
   const classes = useStyles();
-  const [amount, setAmount] = React.useState('0');
-  const [ilsAmount, setIlsAmount] = React.useState('0');
-  const [bank, setBank] = React.useState('אוצר החייל');
-  const [currency, setCurrency] = React.useState('ILS');
-  const [subject, setSubject] = React.useState('');
+  const [amount, setAmount] = React.useState("0");
+  const [ilsAmount, setIlsAmount] = React.useState("0");
+  const [bank, setBank] = React.useState("אוצר החייל");
+  const [currency, setCurrency] = React.useState("ILS");
+  const [subject, setSubject] = React.useState("");
   const [type, setType] = React.useState(props.type);
-  const [file, setFile] = React.useState('null');
+  const [file, setFile] = React.useState("null");
   const [timeHour, setTimeHour] = React.useState(new Date());
   const [timeDate, setDate] = React.useState(new Date());
-  const [getDate, setGetDate] = React.useState('null');
+  const [getDate, setGetDate] = React.useState("null");
   const [idCurr, setIdCurr] = React.useState(0);
   const [timeDateNow, setTimeDateNow] = React.useState(new Date());
 
@@ -88,7 +88,7 @@ export default function Form(props) {
     var year = item.getFullYear().toString();
     var month = item.getMonth() + 1;
     if (month < 10) {
-      var newMonth = '0' + month.toString();
+      var newMonth = "0" + month.toString();
     } else {
       var newMonth = month.toString();
     }
@@ -101,7 +101,7 @@ export default function Form(props) {
     var year = item.getFullYear().toString();
     var month = item.getMonth() + 1;
     if (month < 10) {
-      var newMonth = '0' + month.toString();
+      var newMonth = "0" + month.toString();
     } else {
       var newMonth = month.toString();
     }
@@ -157,7 +157,7 @@ export default function Form(props) {
     var strDate = getDateToReq(timeDate);
     console.log(strDate);
 
-    if (currency === 'ILS') {
+    if (currency === "ILS") {
       setIlsAmount(amount);
       transaction = {
         amount: Number(amount),
@@ -173,10 +173,10 @@ export default function Form(props) {
       };
     } else {
       let requestOptions = {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
       };
-      console.log('client currency:');
+      console.log("client currency:");
 
       var resultRate = false;
       var newDate = new Date(
@@ -207,7 +207,7 @@ export default function Form(props) {
           });
       }
 
-      console.log('this is the rate:' + rate);
+      console.log("this is the rate:" + rate);
 
       transaction = {
         amount: Number(amount),
@@ -223,14 +223,24 @@ export default function Form(props) {
       };
     }
     let requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(transaction),
     };
-    fetch('http://localhost:8000/saveData', requestOptions).then((res) => {
-      // then print response status
-      console.log('sucsess');
-    });
+    fetch("http://localhost:8000/saveData", requestOptions)
+      .then((res) => {
+        // then print response status
+        // console.log("sucsess");
+        // alert("טרנקציה נקלטה בהצלחה!");
+        return res.json();
+      })
+      .then((data) => {
+        if (data.result) {
+          alert("טרנקציה נקלטה בהצלחה!");
+        } else {
+          alert("טרנקציה נכשלה , הינך יודע מדוע אולי?");
+        }
+      });
     props.getTrans(transaction);
   };
 
@@ -242,28 +252,28 @@ export default function Form(props) {
           className={classes.root}
           noValidate
           onSubmit={send}
-          autoComplete='off'
+          autoComplete="off"
         >
           <Grid item xs={12}>
             <div>
               <TextField
-                id='standard-multiline-flexible'
-                label='סכום'
+                id="standard-multiline-flexible"
+                label="סכום"
                 multiline
-                rowsMax='4'
-                textAlign='center'
+                rowsMax="4"
+                textAlign="center"
                 value={amount}
                 className={classes.try}
                 onChange={handleAmount}
               />
               <TextField
-                textAlign='right'
-                id='standard-select-currency'
+                textAlign="right"
+                id="standard-select-currency"
                 select
-                label='בחירה מטבע'
+                label="בחירה מטבע"
                 value={currency}
                 onChange={handleCurrency}
-                helperText='בחר את המטבע הרצוי'
+                helperText="בחר את המטבע הרצוי"
               >
                 {currencies.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
@@ -272,12 +282,12 @@ export default function Form(props) {
                 ))}
               </TextField>
               <TextField
-                id='standard-select-currency'
+                id="standard-select-currency"
                 select
-                label='בחר בנק'
+                label="בחר בנק"
                 value={bank}
                 onChange={handleBank}
-                helperText='בחר את הבנק הרצוי'
+                helperText="בחר את הבנק הרצוי"
               >
                 {banks.map((bank) => (
                   <MenuItem key={bank.name} value={bank.name}>
@@ -286,8 +296,8 @@ export default function Form(props) {
                 ))}
               </TextField>
               <TextField
-                id='standard-multiline-flexible'
-                label='רשום נושא '
+                id="standard-multiline-flexible"
+                label="רשום נושא "
                 multiline
                 onChange={handleSubject}
               />
@@ -297,10 +307,10 @@ export default function Form(props) {
             <div>
               <TextField
                 disabled
-                id='standard-multiline-flexible'
-                label='סוג טרזנקציה'
+                id="standard-multiline-flexible"
+                label="סוג טרזנקציה"
                 multiline
-                rowsMax='4'
+                rowsMax="4"
                 value={props.type}
                 onChange={handleType}
               />
@@ -318,9 +328,9 @@ export default function Form(props) {
             <Grid item xs={5}>
               <Button
                 startIcon={<SaveIcon />}
-                size='large'
-                variant='contained'
-                color='primary'
+                size="large"
+                variant="contained"
+                color="primary"
                 onClick={() => {
                   send();
                   return false;
