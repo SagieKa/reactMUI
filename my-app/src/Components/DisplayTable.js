@@ -152,7 +152,10 @@ export default function MaterialTableDemo(props) {
           icon: 'save_alt',
           tooltip: 'Download File',
           onClick: (event, rowData) => {
-            window.open(`http://localhost:8000/downloadFile/${rowData.file}`);
+            if (rowData.file === 'null')
+              alert('הקובץ הנתון ריק, נא למחוק את הטרנזקציה');
+            else
+              window.open(`http://localhost:8000/downloadFile/${rowData.file}`);
           },
         },
       ]}

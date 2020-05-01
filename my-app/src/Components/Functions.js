@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 
 function Functions(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = React.useState(3);
   const [showMEPlus, setshowMEPlus] = React.useState(false);
   const [showMEHashkha, setshowMEHashkha] = React.useState(false);
   const [showMEMinus, setshowMEMinus] = React.useState(false);

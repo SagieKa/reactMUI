@@ -8,7 +8,7 @@ const columnsRev = [
   { title: 'סוג מטבע', field: 'currency' },
   { title: 'בנק', field: 'bank' },
   { title: 'זמן העסקה', field: 'timeDate', type: 'date' },
-  { title: 'שעת העסקה', field: 'timeHour', type: 'date' },
+  // { title: 'שעת העסקה', field: 'timeHour', type: 'date' },
   { title: 'תאריך', field: 'timeDateNow', type: 'date' },
   // { title: 'File', field: 'file' },
 ];

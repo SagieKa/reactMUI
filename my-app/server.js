@@ -59,21 +59,10 @@ app.post('/upload', function (req, res) {
   });
 });
 app.post('/saveData', async function (req, res, next) {
-  console.log('hi');
-  console.log(req.body);
-  // console.log(req.body);
-  console.log(typeof req.body);
   let trans = new transSchema(req.body);
 
   await trans.save();
-  console.log('this is schema:');
-  // let rek = await transSchema.find({});
-  // console.log(rek);
-  console.log('this is schema:');
-  console.log(trans);
-
   db_json.data.push(req.body);
-  // console.log(db.data);
 });
 app.get('/getData', async function (req, res, next) {
   let trans = await transSchema.find({});
@@ -101,7 +90,7 @@ app.get('/getCurrency/:date/:curr', async function (req, res, next) {
         res.send({ result: true, rate: tryCurr });
         console.log('end log currncyid');
       } catch {
-        console.log('you are faillllllddd');
+        console.log('you are failllddd');
         res.send({ result: false, rate: 0 });
       }
     });

@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
     whiteSpace: 'nowrap',
-    // marginBottom: theme.spacing(50),
   },
   divider: {
     margin: theme.spacing(2, 0),
@@ -43,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
     borderRadius: '25px',
     textAlign: 'center',
-    // width: '200px',
     height: '200px',
   },
 }));
