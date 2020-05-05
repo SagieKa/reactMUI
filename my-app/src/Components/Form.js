@@ -229,14 +229,11 @@ export default function Form(props) {
     };
     fetch("http://localhost:8000/saveData", requestOptions)
       .then((res) => {
-        // then print response status
-        // console.log("sucsess");
-        // alert("טרנקציה נקלטה בהצלחה!");
         return res.json();
       })
       .then((data) => {
         if (data.result) {
-          alert("טרנקציה נקלטה בהצלחה!");
+          alert("טרנזקציה נקלטה בהצלחה!");
         } else {
           alert("טרנקציה נכשלה , הינך יודע מדוע אולי?");
         }
