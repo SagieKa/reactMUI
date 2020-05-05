@@ -160,8 +160,8 @@ export default function Form(props) {
     if (currency === "ILS") {
       setIlsAmount(amount);
       transaction = {
-        amount: Number(amount),
-        ilsAmount: Number(amount),
+        amount: Number(amount).toFixed(2),
+        ilsAmount: Number(amount).toFixed(2),
         currency: currency,
         bank: bank,
         subject: subject,
@@ -210,7 +210,7 @@ export default function Form(props) {
       console.log("this is the rate:" + rate);
 
       transaction = {
-        amount: Number(amount),
+        amount: Number(amount).toFixed(2),
         ilsAmount: (rate * Number(amount)).toFixed(2),
         currency: currency,
         bank: bank,

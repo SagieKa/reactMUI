@@ -47,8 +47,8 @@ export default function MaterialTableDemo(props) {
     console.log("hi you in useafeect this is the data:");
     console.log(state.data);
     state.data.map((x) => {
-      if (x.type === "הכנסה") sumAdd += x.ilsAmount;
-      if (x.type === "הוצאה") sumMinus += x.ilsAmount;
+      if (x.type === "הכנסה") sumAdd += Number(x.ilsAmount);
+      if (x.type === "הוצאה") sumMinus += Number(x.ilsAmount);
     });
     sumTotal = sumAdd - sumMinus;
 
@@ -64,8 +64,8 @@ export default function MaterialTableDemo(props) {
         dataDb = data.result;
         console.log(dataDb);
         dataDb.map((x) => {
-          if (x.type === "Add") sumAdd += x.ilsAmount;
-          if (x.type === "Minus") sumMinus += x.ilsAmount;
+          if (x.type === "Add") sumAdd += Number(x.ilsAmount);
+          if (x.type === "Minus") sumMinus += Number(x.ilsAmount);
         });
         sumTotal = sumAdd - sumMinus;
 
