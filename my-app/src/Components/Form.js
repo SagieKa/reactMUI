@@ -87,13 +87,20 @@ export default function Form(props) {
   const getDateToReq = (item) => {
     var year = item.getFullYear().toString();
     var month = item.getMonth() + 1;
+    var day = item.getDate();
     if (month < 10) {
       var newMonth = "0" + month.toString();
     } else {
       var newMonth = month.toString();
     }
-    var day = item.getDate().toString();
-    var str = year + newMonth + day;
+    if (day < 10) {
+      var newDay = "0" + day.toString();
+    } else {
+      var newDay = day.toString();
+    }
+
+    // var day = item.getDate().toString();
+    var str = year + newMonth + newDay;
     setGetDate(year + newMonth + day);
     return str;
   };
@@ -254,10 +261,9 @@ export default function Form(props) {
           <Grid item xs={12}>
             <div>
               <TextField
-                id="standard-multiline-flexible"
                 label="סכום"
-                multiline
-                rowsMax="4"
+                type="number"
+                rowsMax="8"
                 textAlign="center"
                 value={amount}
                 className={classes.try}

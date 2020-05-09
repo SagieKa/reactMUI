@@ -19,11 +19,14 @@ export default function MaterialTableDemo(props) {
     let data = await response.json();
     return data;
   };
-  const funcDeleteTable = async (id) => {
-    let response = await fetch(`http://localhost:8000/deleteData/${id}`, {
-      method: "Delete",
-      headers: { "Content-Type": "application/json" },
-    });
+  const funcDeleteTable = async (id, file) => {
+    let response = await fetch(
+      `http://localhost:8000/deleteData/${id}/${file}`,
+      {
+        method: "Delete",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
 
     let data = await response.json();
     return data;
@@ -64,6 +67,8 @@ export default function MaterialTableDemo(props) {
         dataDb = data.result;
         console.log(dataDb);
         dataDb.map((x) => {
+          x.amount = x.amount.toFixed(2);
+          x.ilsAmount = x.ilsAmount.toFixed(2);
           if (x.type === "Add") sumAdd += Number(x.ilsAmount);
           if (x.type === "Minus") sumMinus += Number(x.ilsAmount);
         });
@@ -166,7 +171,7 @@ export default function MaterialTableDemo(props) {
             setTimeout(() => {
               resolve();
               setState((prevState) => {
-                funcDeleteTable(oldData._id).then((data) => {
+                funcDeleteTable(oldData._id, oldData.file).then((data) => {
                   console.log(data);
                 });
                 const data = [...prevState.data];

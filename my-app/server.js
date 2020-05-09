@@ -117,8 +117,10 @@ app.post("/updateData", async function (req, res, next) {
   );
 });
 
-app.delete("/deleteData/:id", async function (req, res, next) {
+app.delete("/deleteData/:id/:file", async function (req, res, next) {
   console.log(req.params.id);
+
+  var path = __dirname + "/public/pdf/" + req.params.file;
 
   await transSchema.deleteOne({ _id: req.params.id }, function (err) {
     if (err) {
@@ -128,6 +130,15 @@ app.delete("/deleteData/:id", async function (req, res, next) {
       res.send({ result: true });
     }
   });
+  if (req.params.file !== "null") {
+    console.log(req.params.file);
+    fs.unlink(path, (err) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+    });
+  }
 });
 app.get("/downloadFile/:file", function (req, res, next) {
   console.log(req.params.file);
