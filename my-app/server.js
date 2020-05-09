@@ -60,10 +60,16 @@ app.post("/upload", function (req, res) {
 });
 app.post("/saveData", async function (req, res, next) {
   let trans = new transSchema(req.body);
+  console.log("the file body is:");
+  console.log(req.body.file);
+  // Tweet.findOne().sort({created_at: -1}).exec(function(err, post) { ... });
 
   try {
     await trans.save();
-    res.send({ result: "true" });
+    var id = await transSchema.find().sort({ _id: -1 });
+    console.log("the id is :");
+    console.log(id[0].id);
+    res.send({ result: "true", id: id[0].id });
   } catch {
     res.send({ result: "false" });
   }

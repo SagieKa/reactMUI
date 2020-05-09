@@ -240,6 +240,8 @@ export default function Form(props) {
       })
       .then((data) => {
         if (data.result) {
+          transaction._id = data.id;
+
           alert("טרנזקציה נקלטה בהצלחה!");
         } else {
           alert("טרנקציה נכשלה , הינך יודע מדוע אולי?");
